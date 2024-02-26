@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Video Preview</title>
+    <style>
+      .video-container {
+        display: flex;
+        justify-content: space-between;
+      }
+      video,
+      img {
+        max-width: 49%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="video-container">
+      <video width="320" height="240" controls autoplay>
+        <source
+          src="{{ url_for('static', filename='uploads/' + filename) }}"
+          type="video/mp4"
+        />
+      </video>
+      <img
+        id="processed-video"
+        src="{{ url_for('video_feed', filename=filename) }}"
+      />
+    </div>
+    <form action="{{ url_for('upload_file') }}">
+      <input type="submit" value="Upload Another Video" />
+    </form>
+    <form action="{{ url_for('preview', filename=filename) }}">
+      <input type="submit" value="Preview" />
+    </form>
+    <form action="{{ url_for('video_feed', filename=filename) }}">
+      <input type="submit" value="Submit" />
+    </form>
+  </body>
+</html>
